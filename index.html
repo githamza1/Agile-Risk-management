@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile Project Management</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle, #F3DDB2 0%, #F3DDB2 50%, #D6A850 100%);
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-family: 'Anton SC', serif;
+            font-weight: 1000;
+            color: #5c4508;
+            font-size: 3rem;
+        }
+        h2 {
+            font-family: 'Anton SC', serif;
+            font-weight: 1000;
+            color: #5c4508;
+            font-size: 3rem;
+            background-color: transparent;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #D6A850;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #D6A850;
+            color: white;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #b58b3b;
+        }
+        .btn-action {
+            background-color: #D6A850;
+            color: white;
+            border: none;
+        }
+        .btn-action:hover {
+            background-color: #b58b3b;
+        }
+        .section-header {
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mb-4">
+            <h1>Agile Project Management</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Project Description Cleaning
+            </div>
+            <div class="card-body">
+                <form id="description-form">
+                    <div class="form-group">
+                        <label for="description">Project Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                    </div>
+                    <button type="button" class="btn btn-custom" onclick="submitDescription()">Submit</button>
+                </form>
+                <div id="cleaned-result" class="mt-3"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Risk Identification
+            </div>
+            <div class="card-body text-center">
+                <button type="button" class="btn btn-custom" onclick="submitRisk()">Identify Risks</button>
+                <div id="risk-result" class="mt-3"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Risk Mitigation
+            </div>
+            <div class="card-body text-center">
+                <button type="button" class="btn btn-custom" onclick="submitMitigation()">Mitigate Risks</button>
+                <div id="mitigation-result" class="mt-3"></div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                Performance Metrics
+            </div>
+            <div class="card-body text-center">
+                <button type="button" class="btn btn-custom" onclick="viewPerformanceMetrics()">View Performance Metrics</button>
+                <div id="performance-metrics" class="mt-3"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                LLM Effectiveness
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-custom" onclick="submitEffectiveness()">Check Effectiveness</button>
+                <div id="effectiveness-result" class="mt-3"></div>
+            </div>
+        </div>
+        <div class="section-header text-center">
+            <h2>Actions</h2>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-action m-2" onclick="location.href='/design'">Design</button>
+            <button class="btn btn-action m-2" onclick="location.href='/prototyping'">Prototyping</button>
+            <button class="btn btn-action m-2" onclick="location.href='/customer_evaluation'">Customer Evaluation</button>
+            <button class="btn btn-action m-2" onclick="location.href='/review_and_update'">Review and Update</button>
+            <button class="btn btn-action m-2" onclick="location.href='/development'">Development</button>
+            <button class="btn btn-action m-2" onclick="location.href='/testing'">Testing</button>
+            <button class="btn btn-action m-2" onclick="location.href='/maintenance'">Maintenance</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        async function submitDescription() {
+            const description = document.getElementById('description').value;
+            const response = await fetch('/clean_description/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ description: description })
+            });
+            const data = await response.json();
+            document.getElementById('cleaned-result').innerText = data.cleaned_description;
+        }
+
+        async function submitRisk() {
+            const cleanedDescription = document.getElementById('cleaned-result').innerText;
+            const response = await fetch('/identify_risks/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ description: cleanedDescription })
+            });
+            const data = await response.json();
+            document.getElementById('risk-result').innerHTML = `
+                <h3>Identified Risks:</h3>
+                <pre>${data.risks.join('\n')}</pre>
+                <h3>Risk Assessment:</h3>
+                <pre>${data.assessment}</pre>
+            `;
+        }
+
+        async function submitMitigation() {
+            const cleanedDescription = document.getElementById('cleaned-result').innerText;
+            const response = await fetch('/mitigate_risks/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ description: cleanedDescription })
+            });
+            const data = await response.json();
+            document.getElementById('mitigation-result').innerHTML = `
+                <h3>Risk Mitigation:</h3>
+                <pre>${data.mitigation}</pre>
+            `;
+        }
+
+        async function submitRiskAnalysis() {
+            const descriptions = document.getElementById('descriptions').value.split('\n');
+            const humanRisks = document.getElementById('human-risks').value.split('\n\n').map(project => project.split('\n'));
+            const response = await fetch('/analyze_risks/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ descriptions: descriptions, human_risks: humanRisks })
+            });
+            const data = await response.json();
+            document.getElementById('risk-analysis-result').innerHTML = `
+                <h3>Precision:</h3>
+                <pre>${data.precision}</pre>
+                <h3>Recall:</h3>
+                <pre>${data.recall}</pre>
+                <h3>Risk Comparison Chart:</h3>
+                <img src="${data.chart_url}" alt="Risk Comparison Chart"/>
+            `;
+        }
+
+        async function viewPerformanceMetrics() {
+            const response = await fetch('/performance_metrics/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            document.getElementById('performance-metrics').innerHTML = `
+                <h3>Model Performance Metrics:</h3>
+                <p><strong>Precision:</strong> ${data.precision}</p>
+                <p><strong>Recall:</strong> ${data.recall}</p>
+                <p><strong>F1 Score:</strong> ${data.f1_score}</p>
+                <p><strong>Accuracy:</strong> ${data.accuracy}</p>
+            `;
+        }
+
+                async function submitEffectiveness() {
+            const cleanedDescription = document.getElementById('cleaned-result').innerText;
+            const response = await fetch('/efectiveness/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ description: cleanedDescription })
+            });
+            const data = await response.json();
+            document.getElementById('effectiveness-result').innerText = data.efectveness;
+        }
+    </script>
+</body>
+</html>

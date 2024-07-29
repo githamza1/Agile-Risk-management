@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Project Description</title>
+</head>
+<body>
+    <h1>Clean Project Description</h1>
+    <form id="clean-form">
+        <label for="description">Project Description:</label><br>
+        <textarea id="description" name="description" rows="10" cols="50" required></textarea><br><br>
+        <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+    <h2>Cleaned Description:</h2>
+    <pre id="cleaned_description"></pre>
+    <script>
+        async function submitForm() {
+            const description = document.getElementById('description').value;
+            const response = await fetch('/clean_description/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ description: description })
+            });
+            const data = await response.json();
+            document.getElementById('cleaned_description').innerText = data.cleaned_description;
+        }
+    </script>
+    <button onclick="location.href='/'">Home</button>
+</body>
+</html>

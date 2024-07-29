@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Stage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+        body {
+            background: radial-gradient(circle, #F3DDB2 0%, #F3DDB2 50%, #D6A850 100%);
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            margin: 20px auto;
+            max-width: auto;
+            text-align: left;
+        }
+
+        h1 {
+            font-family: 'Arial', sans-serif; /* Font family */
+            font-size: 2.5rem; /* Font size */
+            color: rgb(34, 34, 34); /* Dark text color */
+            text-align: center; /* Center align the text */
+            margin-top: 20px; /* Space above the heading */
+            margin-bottom: 10px; /* Space below the heading */
+            padding: 10px; /* Padding around the heading */
+            background: linear-gradient(to right, rgb(206, 166, 82), rgb(165, 133, 67)); /* Gradient background */
+            color: white; /* Text color on gradient background */
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        /* Style for the content div */
+        .content {
+            font-family: 'Arial', sans-serif; /* Font family */
+            font-size: 1rem; /* Font size */
+            color: rgb(50, 50, 50); /* Text color */
+            background: rgba(0, 0, 0, 0.1); /* Light background */
+            padding: 20px; /* Padding inside the content area */
+            border-radius: 8px; /* Rounded corners */
+            max-width: 800px; /* Max width for readability */
+            margin: 20px auto; /* Center align with spacing above and below */
+            overflow: auto; /* Handle overflow if content is too large */
+            white-space: pre-wrap; /* Preserve formatting for <pre> element */
+        }
+
+        /* Optional: Style for <pre> element */
+        pre {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap; /* Preserve formatting */
+            margin: 0;
+            overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+            max-width: 100%; 
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-custom {
+            background-color: #D6A850;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-custom:hover {
+            background-color: #B5944F;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Testing Stage</h1>
+        <p class="lead">In Agile, testing is a continuous and integral part of the development process, aimed at ensuring the product meets the required standards
+             of quality and functionality. Testing begins early in the development cycle and occurs throughout each iteration or sprint. It involves various types
+              of tests, including unit tests to verify individual components, integration tests to check interactions between components, and system tests to ensur
+              e the product functions as a whole. Additionally, user acceptance testing is performed to validate that the product meets user needs and expectations.
+               Test results are used to identify and address defects or issues, and feedback from testing helps guide ongoing development and improvements. This 
+               iterative approach to testing ensures that quality is maintained and issues are resolved promptly, allowing for a product that aligns closely with 
+               project goals and user requirements.</p>
+        <a href="/maintenance/" class="btn btn-custom">Next Step: Maintenance</a>
+    </div>
+    <h1>{{ stage }} Process Description</h1>
+    <div class="content">
+        <pre>{{ content }}</pre>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
